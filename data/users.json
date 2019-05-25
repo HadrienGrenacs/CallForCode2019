@@ -1,0 +1,22 @@
+[
+    {
+        "email": "valentin.bonnet@epitech.eu",
+        "password": "1337",
+        "all_perm": true,
+        "rank": "Web Developper",
+        "first_name": "BONNET",
+        "last_name": "Valentin",
+        "phone": "0642409621",
+        "photo": "https://intra.epitech.eu/file/userprofil/commentview/valentin.bonnet.jpg"
+    },
+    {
+        "email": "adrien.delestrade@epitech.eu",
+        "password": "abc",
+        "all_perm": false,
+        "rank": "Web Developper",
+        "first_name": "DELESTRADE",
+        "last_name": "Adrien",
+        "phone": "0607080910",
+        "photo": null
+    }
+]

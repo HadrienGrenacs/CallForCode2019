@@ -1,0 +1,39 @@
+<html>
+<head>
+  <base href="/">
+  <title>Newb-In | Autres</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:image" content="conversation.svg" />
+  <meta property="og:title" content="Conversation Chat Simple" />
+  <meta property="og:description" content="Sample application that shows how to use the Watson Assistant API to identify user intents" />
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div id="title" class="row">Autres (<%= user %>)</div>
+    <div id="menu" class="row">
+        <div class="col-xs-2 m-auto" style="padding: 15px;">
+            <a href="/home" title="Accueil"><i class="fas fa-home"></i></a>
+        </div>
+        <div class="col-xs-2 m-auto" style="padding: 15px;">
+            <a href="/chat-bot" title="Chat-Bot"><i class="fas fa-comment-dots"></i></a>
+        </div>
+        <div class="col-xs-2 m-auto active" style="padding: 15px;">
+            <a href="/others" title="Autres"><i class="fas fa-bars"></i></a>
+        </div>
+    </div>
+    <a href="/others/profile" class="btn btn-light w-100 mt-5 mb-2" style="font-size: 20px;"><i class="fas fa-user"></i> Profile</a>
+    <a href="/others/parameters" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="fas fa-cog"></i> Paramètres et vie privée</a>
+    <a href="/others/assist" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="far fa-question-circle"></i> Assistance</a>
+    <a href="/others/signal" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="fas fa-exclamation-triangle"></i> signaler un problème</a>
+    <a href="/others/logout" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
