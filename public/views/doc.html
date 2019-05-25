@@ -1,7 +1,7 @@
 <html>
 <head>
   <base href="/">
-  <title>Newb-In | E-Learning</title>
+  <title>Newb-In | Documentation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta property="og:image" content="conversation.svg" />
@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="container">
-    <div id="title" class="row">E-Learning (<%= user %>)</div>
+    <div id="title" class="row">Documentation (<%= user %>)</div>
     <div id="menu" class="row">
         <div class="col-xs-2 m-auto" style="padding: 15px;">
             <a href="/home" title="Accueil"><i class="fas fa-home"></i></a>
@@ -22,10 +22,10 @@
         <div class="col-xs-2 m-auto" style="padding: 15px;">
             <a href="/company" title="L'entreprise"><i class="fas fa-user-friends"></i></a>
         </div>
-        <div class="col-xs-2 m-auto" style="padding: 15px;">
+        <div class="col-xs-2 m-auto active" style="padding: 15px;">
             <a href="/doc" title="Documentation"><i class="fas fa-clipboard-list"></i></a>
         </div>
-        <div class="col-xs-2 m-auto active" style="padding: 15px;">
+        <div class="col-xs-2 m-auto" style="padding: 15px;">
             <a href="/e-learning" title="E-Learning"><i class="fas fa-play-circle"></i></a>
         </div>
         <div class="col-xs-2 m-auto" style="padding: 15px;">
@@ -35,28 +35,13 @@
             <a href="/others" title="Autres"><i class="fas fa-bars"></i></a>
         </div>
     </div>
-    <a href="#logiciel" class="btn btn-light w-100 mt-5 mb-2" data-toggle="collapse" style="font-size: 20px;"><i class="fas fa-chevron-right"></i> Logiciel</a>
-    <div id="logiciel" class="collapse mb-3 border p-3 pl-5">
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100">Utilisation du progiciel</a>
-    </div>
-    <a href="#materiel" class="btn btn-light w-100 mb-2" data-toggle="collapse" style="font-size: 20px;"><i class="fas fa-chevron-right"></i> Matériel</a>
-    <div id="materiel" class="collapse mb-3 border p-3 pl-5">
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100">Utilisation du progiciel</a>
-    </div>
-    <a href="#logistique" class="btn btn-light w-100 mb-2" data-toggle="collapse" style="font-size: 20px;"><i class="fas fa-chevron-right"></i> Logistique</a>
-    <div id="logistique" class="collapse mb-3 border p-3 pl-5">
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100 mb-1">Utilisation du progiciel</a>
-        <a href="/e-learning/utilisation-du-progiciel" class="w-100">Utilisation du progiciel</a>
-    </div>
-    
+    <a href="/doc/trombi" class="btn btn-light w-100 mt-5 mb-2" style="font-size: 20px;"><i class="fas fa-users"></i> Organigramme</a>
+    <a href="/doc/admin" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="fas fa-folder-open"></i> Documents administratifse</a>
+    <a href="/doc/tech" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="fas fa-wrench"></i> Fiches techniques</a>
+    <a href="/doc/calendar" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="far fa-calendar"></i> Agenda</a>
+    <a href="/doc/moves" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="fas fa-suitcase"></i> Mobilité internes</a>
+    <a href="/doc/plan" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="fas fa-map-marked-alt"></i> Plan des locaux</a>
+    <a href="/doc/miss" class="btn btn-light w-100 mb-2" style="font-size: 20px;"><i class="far fa-calendar-times"></i> Congés et absences</a>
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>

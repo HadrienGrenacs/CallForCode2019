@@ -116,21 +116,13 @@ app.get('/api/session', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-  var txt_infos = "";
   if (!session.user)
     return res.render('login.html', {error: ""});
   fs.readFile(__dirname + '/data/informations.json', (err, data) => {  
     if (err) throw err;
     let infos = JSON.parse(data);
-    infos.map(info => {
-      txt_infos += "<div class=\"infos\">\
-      <div class=\"infos-title\">${info.title} <small>${info.date}</small></div>\
-      <div class=\"infos-desc\">${info.description}</div>\
-      <div class=\"infos-author\">${info.author}</div>\
-      </div>";
-    });
+    return res.render('home.html', {user: session.user, infos: infos});
   });
-  return res.render('home.html', {user: session.user, infos: txt_infos});
 });
 
 app.post('/', function (req, res) {
@@ -172,6 +164,12 @@ app.get('/e-learning', function (req, res) {
   if (!session.user)
     return res.redirect('/');
   return res.render('e-learning.html', {user: session.user});
+});
+
+app.get('/doc', function (req, res) {
+  if (!session.user)
+    return res.redirect('/');
+  return res.render('doc.html', {user: session.user});
 });
 
 app.get('/others', function (req, res) {
@@ -217,6 +215,16 @@ app.get('/others/assist', function (req, res) {
 app.get('/others/logout', function (req, res) {
   session.user = null;
   return res.redirect('/');
+});
+
+app.get('/company', function (req, res) {
+  if (!session.user)
+    return res.redirect('/');
+  fs.readFile(__dirname + '/data/company.json', (err, data) => {
+    if (err) throw err;
+      let company = JSON.parse(data);
+    return res.render('company.html', {user: session.user, name: company.name, description: company.description});
+  });
 });
 
 module.exports = app;

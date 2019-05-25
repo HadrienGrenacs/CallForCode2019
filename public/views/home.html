@@ -30,10 +30,10 @@
             <a href="/home" title="Accueil"><i class="fas fa-home"></i></a>
         </div>
         <div class="col-xs-2 m-auto" style="padding: 15px;">
-            <a href="#" title="??"><i class="fas fa-user-friends"></i></a>
+            <a href="/company" title="L'entreprise"><i class="fas fa-user-friends"></i></a>
         </div>
         <div class="col-xs-2 m-auto" style="padding: 15px;">
-            <a href="#" title="??"><i class="fas fa-clipboard-list"></i></a>
+            <a href="/doc" title="Documentation"><i class="fas fa-clipboard-list"></i></a>
         </div>
         <div class="col-xs-2 m-auto" style="padding: 15px;">
             <a href="/e-learning" title="E-Learning"><i class="fas fa-play-circle"></i></a>
@@ -45,16 +45,25 @@
             <a href="/others" title="Autres"><i class="fas fa-bars"></i></a>
         </div>
     </div>
+    <div id="list-infos">
+        <% for(var i=0; i < infos.length; i++) { %>
+            <div class="infos">
+                <div class="infos-title"><%= infos[i].title %> <small><%= infos[i].date %></small></div>
+                <div class="infos-desc"><%= infos[i].description %></div>
+                <div class="infos-author"><%= infos[i].author %></div>
+            </div>
+        <% } %>
+    </div>
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
-$(
+$(function() {
     setTimeout(function(){
         $('#logo-loader').fadeOut(1000);
     }, 1000)
-);
+});
 </script>
 </html>
