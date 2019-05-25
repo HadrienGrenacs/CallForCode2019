@@ -3,7 +3,6 @@ dist/
 temp/
 .idea/
 coverage
-.env
 npm-debug.log
 .jshintrc
 .DS_Store
