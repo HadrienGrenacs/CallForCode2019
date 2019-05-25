@@ -19,8 +19,10 @@
 var express = require('express'); // app server
 var bodyParser = require('body-parser'); // parser for post requests
 var AssistantV2 = require('watson-developer-cloud/assistant/v2'); // watson sdk
-var session = require('express-session');
 const fs = require('fs');
+const uuid = require('uuid/v4')
+const session = require('express-session')
+const FileStore = require('session-file-store')(session);
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,11 +36,16 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.set('trust proxy', 1) // trust first proxy
+
+// add & configure middleware
 app.use(session({
+  genid: (req) => {
+    return uuid()
+  },
+  store: new FileStore(),
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: true
 }))
 
 // Create the service wrapper
@@ -116,7 +123,7 @@ app.get('/api/session', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.render('login.html', {error: ""});
   return res.redirect('/home');
 });
@@ -129,101 +136,101 @@ app.post('/', function (req, res) {
     let users = JSON.parse(data);
     users.map(user => {
       if (user.email == req.body.name && user.password == req.body.password) {
-        session.user = user.last_name + ' ' + user.first_name.substr(0, 1) + '.';
-        session.perm = user.all_perm;
-        session.email = user.email;
+        req.session.user = user.last_name + ' ' + user.first_name.substr(0, 1) + '.';
+        req.session.perm = user.all_perm;
+        req.session.email = user.email;
       }
     });
-    if (session.user)
+    if (req.session.user)
       return res.end("success");
     return res.end("No match !");
   });
 });
 
 app.get('/home', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
   fs.readFile(__dirname + '/data/informations.json', (err, data) => {  
     if (err) throw err;
     let infos = JSON.parse(data);
-    if (!session.perm)
-      return res.render('l-home.html', {user: session.user, infos: infos});
-    return res.render('home.html', {user: session.user, infos: infos});
+    if (!req.session.perm)
+      return res.render('l-home.html', {user: req.session.user, infos: infos});
+    return res.render('home.html', {user: req.session.user, infos: infos});
   });
 });
 
 app.get('/chat-bot', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
-  if (!session.perm)
-    return res.render('l-chat-bot.html', {user: session.user});
-  return res.render('chat-bot.html', {user: session.user});
+  if (!req.session.perm)
+    return res.render('l-chat-bot.html', {user: req.session.user});
+  return res.render('chat-bot.html', {user: req.session.user});
 });
 
 app.get('/e-learning', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
-  return res.render('e-learning.html', {user: session.user});
+  return res.render('e-learning.html', {user: req.session.user});
 });
 
 app.get('/doc', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
-  return res.render('doc.html', {user: session.user});
+  return res.render('doc.html', {user: req.session.user});
 });
 
 app.get('/others', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
-  if (!session.perm)
-    return res.render('l-others.html', {user: session.user});
-  return res.render('others.html', {user: session.user});
+  if (!req.session.perm)
+    return res.render('l-others.html', {user: req.session.user});
+  return res.render('others.html', {user: req.session.user});
 });
 
 app.get('/others/profile', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
   fs.readFile(__dirname + '/data/users.json', (err, data) => {  
     if (err) throw err;
       let users = JSON.parse(data);
       users.map(user => {
-      if (user.email == session.email) {
-        if (!session.perm)
-          return res.render('l-profile.html', {user: session.user, first_name: user.first_name, last_name: user.last_name, email: session.email, phone: user.phone, rank: user.rank, perm: session.perm ? "Oui" : "Non", photo: user.photo ? user.photo : "https://png.pngtree.com/svg/20170527/e4e70ac79e.svg"});
-        return res.render('profile.html', {user: session.user, first_name: user.first_name, last_name: user.last_name, email: session.email, phone: user.phone, rank: user.rank, perm: session.perm ? "Oui" : "Non", photo: user.photo ? user.photo : "https://png.pngtree.com/svg/20170527/e4e70ac79e.svg"});
+      if (user.email == req.session.email) {
+        if (!req.session.perm)
+          return res.render('l-profile.html', {user: req.session.user, first_name: user.first_name, last_name: user.last_name, email: req.session.email, phone: user.phone, rank: user.rank, perm: req.session.perm ? "Oui" : "Non", photo: user.photo ? user.photo : "https://png.pngtree.com/svg/20170527/e4e70ac79e.svg"});
+        return res.render('profile.html', {user: req.session.user, first_name: user.first_name, last_name: user.last_name, email: req.session.email, phone: user.phone, rank: user.rank, perm: req.session.perm ? "Oui" : "Non", photo: user.photo ? user.photo : "https://png.pngtree.com/svg/20170527/e4e70ac79e.svg"});
       }
     });
   });
 });
 
 app.get('/others/parameters', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
-  if (!session.perm)
-    return res.render('l-params.html', {user: session.user});
-  return res.render('params.html', {user: session.user});
+  if (!req.session.perm)
+    return res.render('l-params.html', {user: req.session.user});
+  return res.render('params.html', {user: req.session.user});
 });
 
 app.get('/others/assist', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
-  if (!session.perm)
-    return res.render('l-assist.html', {user: session.user});
-  return res.render('assist.html', {user: session.user});
+  if (!req.session.perm)
+    return res.render('l-assist.html', {user: req.session.user});
+  return res.render('assist.html', {user: req.session.user});
 });
 
 app.get('/others/logout', function (req, res) {
-  session.user = null;
+  req.session.user = null;
   return res.redirect('/');
 });
 
 app.get('/company', function (req, res) {
-  if (!session.user)
+  if (!req.session.user)
     return res.redirect('/');
   fs.readFile(__dirname + '/data/company.json', (err, data) => {
     if (err) throw err;
       let company = JSON.parse(data);
-    return res.render('company.html', {user: session.user, name: company.name, description: company.description});
+    return res.render('company.html', {user: req.session.user, name: company.name, description: company.description});
   });
 });
 
