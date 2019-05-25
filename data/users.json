@@ -21,7 +21,7 @@
     },
     {
         "email": "invite@1.fr",
-        "password": "",
+        "password": "1",
         "all_perm": true,
         "rank": "Newb-In Developper",
         "first_name": "NOM",
@@ -31,7 +31,7 @@
     },
     {
         "email": "invite@2.fr",
-        "password": "",
+        "password": "2",
         "all_perm": false,
         "rank": "Newb-In Developper",
         "first_name": "NOM",
