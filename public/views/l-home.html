@@ -36,7 +36,15 @@
             <a href="/others" title="Autres"><i class="fas fa-bars"></i></a>
         </div>
     </div>
-    <p>La Page d'accueil...</p>
+    <div id="list-infos">
+        <% for(var i=0; i < infos.length; i++) { %>
+            <div class="infos">
+                <div class="infos-title"><%= infos[i].title %> <small><%= infos[i].date %></small></div>
+                <div class="infos-desc"><%= infos[i].description %></div>
+                <div class="infos-author"><%= infos[i].author %></div>
+            </div>
+        <% } %>
+    </div>
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>

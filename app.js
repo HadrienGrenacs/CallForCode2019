@@ -118,11 +118,7 @@ app.get('/api/session', function (req, res) {
 app.get('/', function (req, res) {
   if (!session.user)
     return res.render('login.html', {error: ""});
-  fs.readFile(__dirname + '/data/informations.json', (err, data) => {  
-    if (err) throw err;
-    let infos = JSON.parse(data);
-    return res.render('home.html', {user: session.user, infos: infos});
-  });
+  return res.redirect('/home');
 });
 
 app.post('/', function (req, res) {
@@ -138,18 +134,22 @@ app.post('/', function (req, res) {
         session.email = user.email;
       }
     });
+    if (session.user)
+      return res.end("success");
+    return res.end("No match !");
   });
-  if (session.user)
-    return res.end("success");
-  return res.end("No match !");
 });
 
 app.get('/home', function (req, res) {
   if (!session.user)
     return res.redirect('/');
-  if (!session.perm)
-    return res.render('l-home.html', {user: session.user});
-  return res.render('home.html', {user: session.user});
+  fs.readFile(__dirname + '/data/informations.json', (err, data) => {  
+    if (err) throw err;
+    let infos = JSON.parse(data);
+    if (!session.perm)
+      return res.render('l-home.html', {user: session.user, infos: infos});
+    return res.render('home.html', {user: session.user, infos: infos});
+  });
 });
 
 app.get('/chat-bot', function (req, res) {
