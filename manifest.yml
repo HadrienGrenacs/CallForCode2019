@@ -1,5 +1,5 @@
 applications:
-- name: Newb-In
+- name: Newb-In-project
   command: npm start
   path: .
   memory: 256M
